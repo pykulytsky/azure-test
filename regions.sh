@@ -58,5 +58,5 @@ for REGION in "${REGION_LIST[@]}"; do
     --docker-custom-image-name "${ACR_NAME}.azurecr.io/${APP_NAME_PREFIX}-app:${IMAGE_TAG}" \
     --docker-registry-server-url "https://${ACR_NAME}.azurecr.io"
 
-  echo "✅ Deployed to $REGION"
+  echo "Deployed to $REGION"
 done
