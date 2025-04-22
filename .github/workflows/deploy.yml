@@ -18,6 +18,8 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Login to ACR
+      run: az acr login --name olehnest
     - name: Build and push image
       run: |
         docker build -t olehnest.azurecr.io/my-nest-app:${{ github.sha }} .
