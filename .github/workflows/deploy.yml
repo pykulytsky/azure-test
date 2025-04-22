@@ -24,19 +24,24 @@ jobs:
       run: |
         docker build -t olehnest.azurecr.io/my-nest-app:${{ github.sha }} .
         docker push olehnest.azurecr.io/my-nest-app:${{ github.sha }}
+
+    - name: Deploy to all regions
+      run: bash ./deploy-to-regions.sh ${{ github.sha }}
+      env:
+        REGIONS: ${{ secrets.REGIONS }}
     
-    - name: Deploy US instance
-      run: |
-        az webapp config container set \
-          --name my-nest-us \
-          --resource-group rg-us \
-          --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
-          --docker-registry-server-url https://olehnest.azurecr.io
-    
-    - name: Deploy EU instance
-      run: |
-        az webapp config container set \
-          --name my-nest-eu \
-          --resource-group rg-eu \
-          --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
-          --docker-registry-server-url https://olehnest.azurecr.io
+    # - name: Deploy US instance
+    #   run: |
+    #     az webapp config container set \
+    #       --name my-nest-us \
+    #       --resource-group rg-us \
+    #       --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
+    #       --docker-registry-server-url https://olehnest.azurecr.io
+    # 
+    # - name: Deploy EU instance
+    #   run: |
+    #     az webapp config container set \
+    #       --name my-nest-eu \
+    #       --resource-group rg-eu \
+    #       --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
+    #       --docker-registry-server-url https://olehnest.azurecr.io
