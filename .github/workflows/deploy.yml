@@ -20,21 +20,21 @@ jobs:
       uses: actions/checkout@v3
     - name: Build and push image
       run: |
-        docker build -t myacr.azurecr.io/my-nest-app:${{ github.sha }} .
-        docker push myacr.azurecr.io/my-nest-app:${{ github.sha }}
+        docker build -t olehnest.azurecr.io/my-nest-app:${{ github.sha }} .
+        docker push olehnest.azurecr.io/my-nest-app:${{ github.sha }}
     
     - name: Deploy US instance
       run: |
         az webapp config container set \
           --name my-nest-us \
           --resource-group rg-us \
-          --docker-custom-image-name myacr.azurecr.io/my-nest-app:${{ github.sha }} \
-          --docker-registry-server-url https://myacr.azurecr.io
+          --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
+          --docker-registry-server-url https://olehnest.azurecr.io
     
     - name: Deploy EU instance
       run: |
         az webapp config container set \
           --name my-nest-eu \
           --resource-group rg-eu \
-          --docker-custom-image-name myacr.azurecr.io/my-nest-app:${{ github.sha }} \
-          --docker-registry-server-url https://myacr.azurecr.io
+          --docker-custom-image-name olehnest.azurecr.io/my-nest-app:${{ github.sha }} \
+          --docker-registry-server-url https://olehnest.azurecr.io
