@@ -56,6 +56,7 @@ for REGION in "${REGION_LIST[@]}"; do
   VAR_NAME="ENVS_${REGION}"
   echo "${!VAR_NAME}"
   echo "${!VAR_NAME}" > settings.json
+  cat settings.json
   az webapp config appsettings set \
       --resource-group "$RG_NAME" \
       --name "$APP_NAME" \
