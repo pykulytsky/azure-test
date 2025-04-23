@@ -51,6 +51,11 @@ for REGION in "${REGION_LIST[@]}"; do
     echo "Web app $APP_NAME exists"
   fi
 
+
+  echo "Setting settings for container for $APP_NAME"
+  echo "ENVS_${REGION}" > settings.json
+  az webapp config appsettings set -g "$RG_NAME" -n "$APP_NAME" --settings @settings.json
+
   echo "Configuring container for $APP_NAME"
   az webapp config container set \
     --name "$APP_NAME" \
