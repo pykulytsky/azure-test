@@ -30,8 +30,8 @@ jobs:
       run: bash ./regions.sh ${{ github.sha }}
       env:
         REGIONS: ${{ secrets.REGIONS }}
-        ENVS_us: ${{ secrets.ENVS_us }}
-        ENVS_eu: ${{ secrets.ENVS_eu }}
+        ENVS_us: ${{ secrets.ENVS_US }}
+        ENVS_eu: ${{ secrets.ENVS_EU }}
     
     # - name: Deploy US instance
     #   run: |
