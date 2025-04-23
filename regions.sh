@@ -53,10 +53,12 @@ for REGION in "${REGION_LIST[@]}"; do
 
 
   echo "Setting settings for container for $APP_NAME"
-  echo "$REGION"
-  echo "$ENVS_${REGION}"
-  echo "$ENVS_${REGION}" > settings.json
-  az webapp config appsettings set -g "$RG_NAME" -n "$APP_NAME" --settings @settings.json
+  VAR_NAME="ENVS_${REGION}"
+  echo "${!VAR_NAME}" > settings.json
+  az webapp config appsettings set \
+      --resource-group "$RG_NAME" \
+      --name "$APP_NAME" \
+      --settings @"settings.json"
 
   echo "Configuring container for $APP_NAME"
   az webapp config container set \
